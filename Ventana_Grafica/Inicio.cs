@@ -15,13 +15,17 @@ namespace Ventana_Grafica
         {
             if (VerificarDatos())
             {
+                if (RepeatCodigo(txtCodigo.Text))
+                {
+                    
+                }
+
                 this.producto = new Producto();
                 producto.Nombre = txtNombre.Text;
                 producto.Categoria = txtCategoria.Text;
                 producto.Cantidad = int.Parse(txtCantidad.Text);
                 producto.Codigo = txtCodigo.Text;
                 producto.Valor = float.Parse(txtValor.Text);
-
 
                 ListViewItem lista = new ListViewItem(producto.Codigo);
                 lista.SubItems.Add(producto.Nombre);
@@ -33,6 +37,8 @@ namespace Ventana_Grafica
 
                 Limpiar limpiar = new Limpiar();
                 limpiar.limpiarCampos(this, tabAgregar);
+
+
             }
             
 
@@ -207,11 +213,13 @@ namespace Ventana_Grafica
                 btnModificar.Enabled = true;
                 btnVender.Enabled = true;
                 btnEliminar.Enabled = true;
+                btnLimpiar.Enabled = true;  
             }
             else
             {
                 btnModificar.Enabled = false;
                 btnVender.Enabled = false;
+                btnLimpiar.Enabled= false;
 
 
             }
@@ -245,20 +253,91 @@ namespace Ventana_Grafica
                 }
                 else
                 {
-                    int texto = int.Parse(lvwListaProductos.SelectedItems[0].SubItems[3].Text);
+                    producto.Cantidad = int.Parse(lvwListaProductos.SelectedItems[0].SubItems[3].Text);
 
-                    int total = (texto - 1);
-                    Console.WriteLine(total);
-                    Console.ReadLine();
+                    producto.RestarProducto();
+                    
+                    lvwListaProductos.SelectedItems[0].SubItems[3].Text = producto.Cantidad.ToString();
+                    Limpiar limpiar = new Limpiar();
 
-                    total= int.Parse(lvwListaProductos.SelectedItems[0].SubItems[3].Text);
-                    lvwListaProductos.SelectedItems[0].SubItems[3].Text = total.ToString();
+                    limpiar.limpiarCampos(this, tabAgregar);
                 }
             }
             catch
             {
 
             }
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            Limpiar limpiar = new Limpiar();
+
+            limpiar.limpiarCampos(this, tabAgregar);
+        }
+        public bool RepeatCodigo(string codigo)
+        {
+            for(int i=0; i<lvwListaProductos.Items.Count -1; i++)
+            { 
+                try
+                {
+                    if (lvwListaProductos.Items[0].SubItems[3].Text == codigo)
+                    {
+                        producto.Cantidad = int.Parse(lvwListaProductos.SelectedItems[i].SubItems[3].Text);
+                        producto.SumarCantidad(int.Parse(txtCantidad.Text));
+
+                        lvwListaProductos.SelectedItems[0].Text = lvwListaProductos.SelectedItems[0].Text;
+                        lvwListaProductos.SelectedItems[0].SubItems[1].Text = lvwListaProductos.SelectedItems[0].SubItems[1].Text;
+                        lvwListaProductos.SelectedItems[0].SubItems[2].Text = lvwListaProductos.SelectedItems[0].SubItems[2].Text;
+                        lvwListaProductos.SelectedItems[0].SubItems[3].Text= producto.Cantidad.ToString();
+                        lvwListaProductos.SelectedItems[0].SubItems[4].Text = lvwListaProductos.SelectedItems[0].SubItems[4].Text;
+                        Limpiar limpiar = new Limpiar();
+                        limpiar.limpiarCampos(this, tabAgregar);
+                        return true;
+
+                    }
+                    return false;
+                }
+                catch 
+                {
+
+                }
+                
+            }
+            return false;
+
+        }
+
+        private void txtCodigo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= 32 && e.KeyChar <= 47) || (e.KeyChar >= 58 && e.KeyChar <= 255))
+            {
+                MessageBox.Show("Solo numeros", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= 32 && e.KeyChar <= 64) || (e.KeyChar >= 91 && e.KeyChar <= 96) || (e.KeyChar >= 123 && e.KeyChar <= 255))
+            {
+                MessageBox.Show("Solo letras", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
+
+        }
+
+        private void txtCategoria_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= 32 && e.KeyChar <= 64) || (e.KeyChar >= 91 && e.KeyChar <= 96) || (e.KeyChar >= 123 && e.KeyChar <= 255))
+            {
+                MessageBox.Show("Solo letras", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
+
         }
     }
 

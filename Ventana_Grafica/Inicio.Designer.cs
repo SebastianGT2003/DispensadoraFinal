@@ -32,6 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabOpciones = new System.Windows.Forms.TabControl();
             this.tabAgregar = new System.Windows.Forms.TabPage();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnVender = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
@@ -96,6 +97,7 @@
             // 
             // tabAgregar
             // 
+            this.tabAgregar.Controls.Add(this.btnLimpiar);
             this.tabAgregar.Controls.Add(this.btnVender);
             this.tabAgregar.Controls.Add(this.btnEliminar);
             this.tabAgregar.Controls.Add(this.btnModificar);
@@ -118,6 +120,18 @@
             this.tabAgregar.TabIndex = 3;
             this.tabAgregar.Text = "Productos";
             this.tabAgregar.UseVisualStyleBackColor = true;
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Enabled = false;
+            this.btnLimpiar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnLimpiar.Location = new System.Drawing.Point(89, 126);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(94, 29);
+            this.btnLimpiar.TabIndex = 21;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnVender
             // 
@@ -187,8 +201,10 @@
             // 
             this.txtNombre.Location = new System.Drawing.Point(337, 33);
             this.txtNombre.Name = "txtNombre";
+            this.txtNombre.ShortcutsEnabled = false;
             this.txtNombre.Size = new System.Drawing.Size(125, 27);
             this.txtNombre.TabIndex = 19;
+            this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
             // 
             // txtValor
             // 
@@ -201,15 +217,19 @@
             // 
             this.txtCategoria.Location = new System.Drawing.Point(574, 33);
             this.txtCategoria.Name = "txtCategoria";
+            this.txtCategoria.ShortcutsEnabled = false;
             this.txtCategoria.Size = new System.Drawing.Size(125, 27);
             this.txtCategoria.TabIndex = 17;
+            this.txtCategoria.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCategoria_KeyPress);
             // 
             // txtCodigo
             // 
             this.txtCodigo.Location = new System.Drawing.Point(115, 33);
             this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.ShortcutsEnabled = false;
             this.txtCodigo.Size = new System.Drawing.Size(125, 27);
             this.txtCodigo.TabIndex = 15;
+            this.txtCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigo_KeyPress);
             // 
             // lbValor
             // 
@@ -307,7 +327,7 @@
             this.MaximizeBox = false;
             this.Name = "Inicio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "App Dispensadora";
             this.tblInicio.ResumeLayout(false);
             this.tblInicio.PerformLayout();
             this.tabOpciones.ResumeLayout(false);
@@ -343,5 +363,6 @@
         private Button btnVender;
         private Button btnEliminar;
         private Button btnModificar;
+        private Button btnLimpiar;
     }
 }
