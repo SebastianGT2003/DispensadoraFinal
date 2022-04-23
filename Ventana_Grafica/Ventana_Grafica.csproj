@@ -8,4 +8,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AppDispensadora\AppDispensadora.csproj" />
+    <ProjectReference Include="..\Dispensador\Dispensador.csproj" />
+  </ItemGroup>
+
 </Project>
