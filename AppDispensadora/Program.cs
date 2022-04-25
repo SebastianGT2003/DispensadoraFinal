@@ -2,12 +2,13 @@
 using Dispensador;
 
 Dispensadora dispensador = new Dispensadora();
+ListaProductos lista=new ListaProductos();
 Console.WriteLine("Bienvenidos a la dispensadora de Sara");
 while (true)
 {
     
 
-    Console.WriteLine(dispensador.ListarProducto());
+    Console.WriteLine(lista.ListarProducto());
 
 
 

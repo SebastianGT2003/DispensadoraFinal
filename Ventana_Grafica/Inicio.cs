@@ -8,6 +8,7 @@ namespace Ventana_Grafica
         public Inicio()
         
         {
+            
             InitializeComponent();
         }
 
@@ -339,6 +340,7 @@ namespace Ventana_Grafica
             }
 
         }
+
     }
 
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Dispensador;
 
 
+
 namespace Dispensador
 {
     public class Validaciones
@@ -13,6 +14,7 @@ namespace Dispensador
         Dispensadora lista;
         public int ValidaProducto(string codigo)
         {
+            lista = new Dispensadora();
             
             int encontro = -1;
 
@@ -24,6 +26,25 @@ namespace Dispensador
                 }
             }
             return encontro;
+        }
+        public double ValidarMonedas(string[] monedas)
+        {
+            double total = 0;
+            foreach (string item in monedas)
+            {
+
+                try
+                {
+                    total += float.Parse(item);
+
+                }
+                catch (Exception e) { }
+
+                return total;
+
+            }
+            return total;
+
         }
     }
 }

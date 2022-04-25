@@ -13,12 +13,13 @@ namespace Dispensador
         public string Pago { get; set; }
         public Dispensadora()
         {
+            validar = new Validaciones();
             this.Productos = new List<Producto>();  
 
             Producto Cocacola = new Producto();
             Cocacola.Codigo = "01";
             Cocacola.Nombre = "Coca Cola";
-            Cocacola.Valor = 3000;
+            Cocacola.Valor = 300;
             Cocacola.Categoria = "B";
             Cocacola.Cantidad = 3;
 
@@ -45,24 +46,9 @@ namespace Dispensador
 
         }
         
-        public int ValidaProducto(string codigo)
-        {
-            int encontro = -1;
-
-            for (int i = 0;i<this.Productos.Count;i++)
-            {
-                if (this.Productos[i].Codigo == codigo)
-                {
-                    encontro = i;
-                }
-            }
-            return encontro;
-        }
-        
-        
         public bool AgregarProducto(Producto producto)
         {
-            int enc= this.ValidaProducto(producto.Codigo);
+            int enc= validar.ValidaProducto(producto.Codigo);
             if (enc>=0)
             {
                 this.Productos[enc].SumarCantidad(producto.Cantidad);
@@ -75,7 +61,7 @@ namespace Dispensador
         }
         public bool EleminarProducto(string codigo)
         {
-            int enc = this.ValidaProducto(codigo);
+            int enc = validar.ValidaProducto(codigo);
             if (enc >= 0) 
             {
                 this.Productos.RemoveAt(enc);
@@ -86,35 +72,17 @@ namespace Dispensador
             
         }
         /// Metodo para validar si las monedas tiene alguna letra.
-        public double ValidarMonedas (string[] monedas)
-        {
-            double total = 0;
-            foreach (string item in monedas)
-            {
 
-                try
-                {
-                    total += float.Parse(item);
-                    
-                }
-                catch (Exception e) { }
-                
-            return total;
-
-            }
-            return total;
-
-        }
         //Las monedas van a ser: 1000-500-200-100
         public Producto Vender(string codigo)
         {
-            int enc = this.ValidaProducto(codigo);
+            int enc = validar.ValidaProducto(codigo);
             if (enc >= 0)
             {
                 if (this.Productos[enc].ValidarCantidad())
                 {
                     string[] monedas = this.Pago.Split("-");
-                    double total= this.ValidarMonedas(monedas);
+                    double total= validar.ValidarMonedas(monedas);
 
                     if (this.Productos[enc].ValidarValor(total))
                     {
@@ -130,15 +98,7 @@ namespace Dispensador
 
             return null;
         }
-        public string ListarProducto() 
-        {
-            string lista = "";
-            foreach(Producto item in this.Productos)
-            {
-                lista += item.Codigo + " " + item.Nombre + " Categoria " + item.Categoria + " Cantidad " + item.Cantidad + " Costo unidad " + item.Valor + "\n";
-            }
-            return lista;
-        }
+        
 
     }
 }
