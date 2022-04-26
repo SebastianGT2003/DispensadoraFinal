@@ -8,12 +8,18 @@ namespace Dispensador
 {
     public class ListaProductos
     {
-        Dispensadora dispensadora= new Dispensadora();
+        public List<Producto> Productos;
+
+
+        public ListaProductos(Dispensadora dispensadora)
+        {
+            Productos= dispensadora.Productos;
+        }
         public string ListarProducto()
         {
             
             string lista = "";
-            foreach (Producto item in dispensadora.Productos)
+            foreach (Producto item in Productos )
             {
                 lista += item.Codigo + " " + item.Nombre + " Categoria " + item.Categoria + " Cantidad " + item.Cantidad + " Costo unidad " + item.Valor + "\n";
             }

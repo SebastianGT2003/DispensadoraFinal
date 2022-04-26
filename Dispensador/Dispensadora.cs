@@ -26,7 +26,7 @@ namespace Dispensador
             Producto Solterita = new Producto();
             Solterita.Codigo = "02";
             Solterita.Nombre = "Solterita";
-            Solterita.Valor = 2000;
+            Solterita.Valor = 200;
             Solterita.Categoria = "C";
             Solterita.Cantidad = 5;
 
@@ -34,14 +34,22 @@ namespace Dispensador
 
             Producto Papas = new Producto();
             Papas.Codigo = "03";
-            Papas.Valor = 2000;
+            Papas.Valor = 1000;
             Papas.Nombre = "Papas Margaritas";
             Papas.Categoria = "C";
             Papas.Cantidad = 10;
 
+            Producto Yogurt= new Producto();
+            Yogurt.Codigo = "04";
+            Yogurt.Valor = 100;
+            Yogurt.Categoria = "C";
+            Yogurt.Cantidad = 11;
+            Yogurt.Nombre = "Yogurt";
+
             this.Productos.Add(Cocacola);
-            this.Productos.Add(Papas);
             this.Productos.Add(Solterita);
+            this.Productos.Add(Papas);
+            Productos.Add(Yogurt);
 
 
         }
@@ -52,12 +60,14 @@ namespace Dispensador
             if (enc>=0)
             {
                 this.Productos[enc].SumarCantidad(producto.Cantidad);
+                return true;
             }
             else
             {
                 this.Productos.Add(producto);
+                return false;
             }
-            return true;
+            
         }
         public bool EleminarProducto(string codigo)
         {
@@ -67,8 +77,33 @@ namespace Dispensador
                 this.Productos.RemoveAt(enc);
                 return true;
             }
-            return false;
+            else
+            {
+                Console.WriteLine("El codigo no existe");
+                return false;
+            }
+            
   
+           
+        }
+        public bool ModificarProducto(Producto producto)
+        {
+
+            int enc = validar.ValidaProducto(producto.Codigo);
+            if (enc >= 0)
+            {
+                this.Productos[enc].Nombre = producto.Nombre;
+                this.Productos[enc].Cantidad = producto.Cantidad;
+                this.Productos[enc].Categoria = producto.Categoria;
+                this.Productos[enc].Valor = producto.Valor;
+                return true;
+
+            }
+            else
+            {
+                Console.WriteLine("El codigo no existe");
+                return false;
+            }
             
         }
         /// Metodo para validar si las monedas tiene alguna letra.
@@ -98,7 +133,8 @@ namespace Dispensador
 
             return null;
         }
-        
+
+
 
     }
 }

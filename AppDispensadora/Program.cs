@@ -2,7 +2,7 @@
 using Dispensador;
 
 Dispensadora dispensador = new Dispensadora();
-ListaProductos lista=new ListaProductos();
+ListaProductos lista=new ListaProductos( dispensador);
 Console.WriteLine("Bienvenidos a la dispensadora de Sara");
 while (true)
 {
@@ -44,7 +44,26 @@ while (true)
 
             break;
         case "2":
-        // codigo para modificar
+            
+            Producto otroproducto = new Producto();
+            Console.WriteLine("Codigo");
+            otroproducto.Codigo = Console.ReadLine();
+
+            Console.WriteLine("Nombre");
+            otroproducto.Nombre = Console.ReadLine();
+
+            Console.WriteLine("Categoria");
+            otroproducto.Categoria = Console.ReadLine();
+
+            Console.WriteLine("Cantidad");
+            otroproducto.Cantidad = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Valor");
+            otroproducto.Valor = double.Parse(Console.ReadLine());
+
+            dispensador.ModificarProducto(otroproducto);
+            break;
+
         case "3":
             Console.Write("Codigo");
             string codigo = Console.ReadLine();
